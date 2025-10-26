@@ -145,10 +145,10 @@ def prepare_transformed_hologram_CORRECTED(hologram, z, L, pixel_size, wavelengt
     X_prime_2d = np.zeros((M, N), dtype=np.float32)
     Y_prime_2d = np.zeros((M, N), dtype=np.float32)
 
-    for i in range(M):
-        X_prime_2d[i, :] = X_prime_grid
-    for j_idx in range(N):
-        Y_prime_2d[:, j_idx] = Y_prime_grid[j_idx]
+    for row in range(M):
+        for col in range(N):
+            X_prime_2d[row, col] = X_prime_grid[col]  # Column → X
+            Y_prime_2d[row, col] = Y_prime_grid[row]  # Row → Y
 
     # Compute R' from (X', Y') using equation (1.24)
     R_prime = np.sqrt(L ** 2 - X_prime_2d ** 2 - Y_prime_2d ** 2)
